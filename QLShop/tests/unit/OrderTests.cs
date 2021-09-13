@@ -2,6 +2,7 @@ using NUnit.Framework;
 using QLShop.src.models.order;
 using QLShop.src.models.product;
 using System.Collections.Generic;
+using System;
 
 namespace QLShop
 {
@@ -11,9 +12,9 @@ namespace QLShop
         public void CalculateTotalTest()
         {
             List<Product> products = new List<Product> {
-                new Product("Television",  300.01f),
-                new Product("Couch",  400.01f),
-                new Product("Table",  200.01f)
+                new Product(Guid.NewGuid(),  "Television", 300.01f),
+                new Product(Guid.NewGuid(),  "Couch", 400.01f),
+                new Product(Guid.NewGuid(),  "Table", 200.01f)
             };
 
             Order order = new Order();
@@ -37,7 +38,7 @@ namespace QLShop
         public void AddProductTest()
         {
             Order order = new Order();
-            order.AddProduct(new Product("Television", 300.01f));
+            order.AddProduct(new Product(Guid.NewGuid(), "Television", 300.01f));
 
             Assert.AreEqual(1, order.Products.Count);
             Assert.AreEqual("Television", order.Products[0].Name);
@@ -48,9 +49,9 @@ namespace QLShop
         public void AddManyProductsTest()
         {
             List<Product> products = new List<Product> {
-                new Product("Television",  300.01f),
-                new Product("Couch", 400.01f),
-                new Product("Table", 200.01f)
+                new Product(Guid.NewGuid(), "Television",  300.01f),
+                new Product(Guid.NewGuid(), "Couch", 400.01f),
+                new Product(Guid.NewGuid(), "Table", 200.01f)
             };
 
             Order order = new Order();

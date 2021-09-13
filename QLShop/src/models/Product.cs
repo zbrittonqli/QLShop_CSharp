@@ -13,8 +13,9 @@ namespace QLShop.src.models.product
         public float Price { get; set; }
         public int Count { get; set; }
 
-        public Product(string name, float price)
+        public Product(Guid id, string name, float price)
         {
+            Id = id;
             Name = name;
             Price = price;
         }
