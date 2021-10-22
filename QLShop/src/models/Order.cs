@@ -21,7 +21,7 @@ namespace QLShop.src.models.order
                 if (item.Id == product.Id)
                 {
                     duplicateFound = true;
-                    item.Count++;
+                    item.Quantity++;
                 }
             }
 
@@ -33,28 +33,12 @@ namespace QLShop.src.models.order
             CalculateTotal();
         }
 
-        public void AddManyProducts(List<Product> products)
+        public void AddManyProducts(List<Product> newProducts)
         {
-            bool duplicateFound = false;
-
-            foreach (Product item in Products)
+            foreach (Product newProduct in newProducts)
             {
-                foreach (Product newProduct in products)
-                {
-                    if (item.Id == newProduct.Id)
-                    {
-                        duplicateFound = true;
-                        item.Count++;
-                    }
-                }
+                AddProduct(newProduct);
             }
-
-            if (!duplicateFound)
-            {
-                Products.AddRange(products);
-            }
-
-            CalculateTotal();
         }
 
         public void Cancel()
@@ -65,6 +49,8 @@ namespace QLShop.src.models.order
 
         public void CalculateTotal()
         {
+            Total = 0;
+
             foreach (Product product in Products)
             {
                 Total += product.Price;
